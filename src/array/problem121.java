@@ -1,0 +1,36 @@
+package array;
+
+public class problem121 {
+	/* 暴力算法 复杂度为n方*/
+	public int maxProfit(int[] prices) {
+		if (prices.length==1||prices.length==0) {
+			return 0;
+		}
+		int max=0;
+		for (int i = 0; i < prices.length; i++) {
+			for (int j = i+1; j < prices.length; j++) {
+				if (prices[j]-prices[i]>max) {
+					max=prices[j]-prices[i];
+				}
+			}
+		}
+		return max;
+		
+	}
+	/* 别人的方法 复杂度为n，一次遍历。找到当前低谷值，之后的值如果比当前低谷值大，则它们之差与max值进行比较选择；否则，将当前最低谷值改到这个点，之后的点仍需与max值进行比较 */
+	public int maxProfit1(int[] prices) {
+		if (prices.length==0) {
+			return 0;
+		}
+		int max=0; 
+		int sofarMin=prices[0];
+		for (int i = 0; i < prices.length; i++) {
+			if (prices[i]>sofarMin) {
+				max=Math.max(max, prices[i]-sofarMin);
+			}else {
+				sofarMin=prices[i];
+			}
+		}
+		return max;				
+	}	
+}
